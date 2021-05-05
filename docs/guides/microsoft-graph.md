@@ -35,7 +35,7 @@ terraform {
   required_providers {
     azuread = {
       source  = "hashicorp/azuread"
-      version = "~> 1.5"
+      version = "~> 1.5.0"
     }
   }
 }
@@ -53,13 +53,15 @@ This will enable you to upgrade to version 2.0 at your convenience, by simply ad
 
 ## New API permissions
 
-Microsoft Graph is a different web service to Azure Active Directory Graph, and as such you may need to assign new permissions to [your authenticated principal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/service_principal_configuration), whether you are authenticating using a service principal, or a user principal via the Azure CLI.
+Microsoft Graph is a different web service to Azure Active Directory Graph, and as such if you are authenticating using a service principal, you may need to assign new permissions to [your authenticated principal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/service_principal_configuration).
 
 ### Assigning directory roles
 
-If you are using directory roles to assign effective permissions to your authenticated principal, you may not necessarily need to assign new API permissions. However, if you are authenticating using a service principal, we recommend assigning permissions using app roles as detailed below. Note that this differs from our advice for v1.x releases, due to bugs previously encountered with Azure Active Directory Graph that do not occur with Microsoft Graph.
+If you are using directory roles to assign effective permissions to your authenticated principal, you may not necessarily need to assign new API permissions.
 
-### Assigning new API permissions
+Assigning directory roles is the recommended approach for user principals, However, if you are authenticating using a service principal, we recommend assigning permissions using app roles as detailed below. Note that this differs from our advice for v1.x releases, due to bugs previously encountered with Azure Active Directory Graph that do not occur with Microsoft Graph.
+
+### Assigning new API permissions for a service principal
 
 To assign permissions to your Application for use with Service Principal authentication, navigate to the [**Azure Active Directory** overview](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview) within the [Azure Portal](https://portal.azure.com/) and select the [**App Registrations** blade](https://portal.azure.com#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Locate your registered application and click on its display name to manage it.
 
